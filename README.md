@@ -2,13 +2,17 @@
 
 A simple full stack web app that helps users to save and keep track of the job applications they made.
 
+## Installation Instructions
+
+-
+
 ## Requirements
 
 ### Functional Requirements
 
 - Authentication
 - Database to allow users to create, read, update, and delete job postings
-- REST api to interact with database
+- REST api to allow interaction between frontend and database
 - UI that allows users to interact with their job postings.
 
 ### Features
@@ -27,6 +31,12 @@ A simple full stack web app that helps users to save and keep track of the job a
 - Connect the web server to Mongo Atlas
 - Set up authentication with JWT
 
-## Milestone 2
+### Milestone 2
 
 - Set up REST api
+- Login/Register pages
+- User Dashboard
+
+### Milestone 3
+
+-
