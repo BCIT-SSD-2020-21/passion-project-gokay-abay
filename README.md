@@ -40,5 +40,6 @@ A simple full stack web app that helps users to save and keep track of the job a
 
 ### Milestone 3
 
-- Web Scrape for job postings
-- Job application email reminders
+- Job Search (Web Scraping)
+- Email reminders to do followups
+- Export to spreadsheet functionality
