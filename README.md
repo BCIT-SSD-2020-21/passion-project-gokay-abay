@@ -2,9 +2,12 @@
 
 A simple full stack web app that helps users to save and keep track of the job applications they made.
 
-## Installation Instructions
+## Tech Stack
 
--
+- React
+- Node.js
+- MongoDB
+- Express
 
 ## Requirements
 
@@ -21,8 +24,6 @@ A simple full stack web app that helps users to save and keep track of the job a
 - Send an email to user to remind them to do followups after certain time for the jobs they applied
 - Implement automation to allow users to login to their linkedin and scrape job postings
 
----
-
 ## Milestones
 
 ### Milestone 1
@@ -34,9 +35,10 @@ A simple full stack web app that helps users to save and keep track of the job a
 ### Milestone 2
 
 - Set up REST api
-- Login/Register pages
-- User Dashboard
+- UI: Login/Register pages
+- UI: User Dashboard
 
 ### Milestone 3
 
--
+- Web Scrape for job postings
+- Job application email reminders
