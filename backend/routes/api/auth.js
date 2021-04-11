@@ -18,7 +18,6 @@ router.get("/", auth, async (req, res) => {
     console.error(err.message)
     res.status(500).send("Server error")
   }
-  res.send("User route")
 })
 
 // @route   POST api/auth
@@ -56,11 +55,7 @@ router.post(
           .json({ errors: [{ msg: "Invalid Credentials" }] })
       }
 
-      const payload = {
-        user: {
-          id: user.id,
-        },
-      }
+      const payload = { user: { id: user.id } }
 
       jwt.sign(
         payload,

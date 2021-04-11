@@ -49,11 +49,7 @@ router.post(
       await user.save()
 
       // Return jsonwebtoken
-      const payload = {
-        user: {
-          id: user.id,
-        },
-      }
+      const payload = { user: { id: user.id } }
 
       jwt.sign(
         payload,
