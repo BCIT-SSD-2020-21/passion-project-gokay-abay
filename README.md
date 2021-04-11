@@ -43,3 +43,9 @@ A simple full stack web app that helps users to save and keep track of the job a
 - Job Search (Web Scraping)
 - Email reminders to do followups
 - Export to spreadsheet functionality
+
+## Design
+
+### Color Palette
+
+https://coolors.co/a2faa3-92c9b1-4f759b-5d5179-571f4e
