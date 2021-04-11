@@ -15,7 +15,6 @@ const JobPostSchema = new mongoose.Schema({
   },
   location: {
     type: String,
-    require: true,
   },
   recruiterContact: {
     type: String,
