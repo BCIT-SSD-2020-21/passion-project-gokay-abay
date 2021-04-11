@@ -41,16 +41,6 @@ router.post(
     }
 
     try {
-      //   let newPost = await JobPost.findOne({ user: req.user.id })
-
-      //   if (newPost) {
-      //     newPost = await JobPost.findOneAndUpdate(
-      //       { user: req.user.id },
-      //       { $set: req.body },
-      //       { new: true }
-      //     )
-      //     return res.json(newPost)
-      //   }
       const postObj = req.body
       let newPost = new JobPost({ ...postObj, user: req.user.id })
       await newPost.save()
