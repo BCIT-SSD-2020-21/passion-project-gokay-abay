@@ -9,7 +9,7 @@ const JobPost = require("../../models/JobPost")
 // @access  Private
 router.get("/", auth, async (req, res) => {
   try {
-    const post = await JobPost.findOne({ user: req.user.id }).populate("user", [
+    const post = await JobPost.find({ user: req.user.id }).populate("user", [
       "name",
     ])
     if (!post) {
