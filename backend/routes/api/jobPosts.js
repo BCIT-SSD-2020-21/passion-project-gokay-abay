@@ -69,10 +69,9 @@ router.get("/:id", auth, async (req, res) => {
   const postId = req.params.id
 
   try {
-    // search for the post that meets the id
     const post = await JobPost.findById(postId)
     if (!post) {
-      return res.status(400).send({ msg: "There is no post with this id" })
+      return res.status(400).send({ msg: "Post not found" })
     }
     res.json(post)
   } catch (err) {
@@ -88,5 +87,22 @@ router.get("/:id", auth, async (req, res) => {
 // @route   DELETE api/posts/id
 // @desc    Delete post by Id
 // @access  Private
+router.delete("/:id", auth, async (req, res) => {
+  const postId = req.params.id
+
+  try {
+    const post = await JobPost.findById(postId)
+
+    if (!post) {
+      return res.status(400).send({ msg: "Post not found" })
+    }
+
+    await post.remove()
+    res.json(post)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send({ msg: "Server error" })
+  }
+})
 
 module.exports = router
