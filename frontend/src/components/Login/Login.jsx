@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 0),
     fontSize: 19,
+    backgroundColor: "#5D5179",
+    color: "white",
   },
   social: {
     margin: 50,
@@ -149,7 +151,6 @@ const Login = ({ onSubmit, error }) => {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
             className={classes.submit}
           >
             {tabValue === 1 ? "Sign Up" : "Login"}
