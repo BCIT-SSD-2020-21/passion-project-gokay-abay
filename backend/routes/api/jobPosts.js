@@ -51,7 +51,6 @@ router.post(
       //     )
       //     return res.json(newPost)
       //   }
-
       const postObj = req.body
       let newPost = new JobPost({ ...postObj, user: req.user.id })
       await newPost.save()
@@ -62,5 +61,32 @@ router.post(
     }
   }
 )
+
+// @route   GET api/posts/id
+// @desc    Get post by Id
+// @access  Private
+router.get("/:id", auth, async (req, res) => {
+  const postId = req.params.id
+
+  try {
+    // search for the post that meets the id
+    const post = await JobPost.findById(postId)
+    if (!post) {
+      return res.status(400).send({ msg: "There is no post with this id" })
+    }
+    res.json(post)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send({ msg: "Server error" })
+  }
+})
+
+// @route   PUT api/posts/id
+// @desc    Update post by Id
+// @access  Private
+
+// @route   DELETE api/posts/id
+// @desc    Delete post by Id
+// @access  Private
 
 module.exports = router
