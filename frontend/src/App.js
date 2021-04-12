@@ -3,7 +3,12 @@ import React, { useState, useEffect } from "react"
 import LoginPage from "./pages/LoginPage/LoginPage"
 import Navbar from "./components/Navbar/Navbar"
 import DashboardPage from "./pages/DashboardPage/DashboardPage"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom"
 import jwtDecode from "jwt-decode"
 import useLocalStorage from "react-use-localstorage"
 
@@ -24,16 +29,28 @@ function App() {
     setUser()
   }
 
+  const PrivateRoute = ({ path, children }) => (
+    <Route exact path={path}>
+      {!!user ? children : <Redirect to="/" />}
+    </Route>
+  )
+
+  const PublicRoute = ({ path, children }) => (
+    <Route exact path={path}>
+      {!user ? children : <Redirect to="/dashboard" />}
+    </Route>
+  )
+
   return (
     <Router className="App">
       <Navbar signOut={signOut} user={user} />
       <Switch>
-        <Route exact path="/">
+        <PublicRoute exact path="/">
           <LoginPage setToken={setToken} />
-        </Route>
-        <Route exact path="/dashboard">
+        </PublicRoute>
+        <PrivateRoute exact path="/dashboard">
           <DashboardPage />
-        </Route>
+        </PrivateRoute>
       </Switch>
     </Router>
   )
