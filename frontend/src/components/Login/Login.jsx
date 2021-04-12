@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 const Login = ({ onSubmit, error }) => {
   const classes = useStyles()
   const [tabValue, setTabValue] = useState(0)
-  const [username, setUsername] = useState("")
+  const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
@@ -49,12 +49,12 @@ const Login = ({ onSubmit, error }) => {
   const submit = (event) => {
     event.preventDefault()
     if (tabValue === 0) {
-      onSubmit({ type: "login", username, password })
+      onSubmit({ type: "login", email, password })
     } else {
-      onSubmit({ type: "signUp", email, username, password, confirmPassword })
+      onSubmit({ type: "signUp", email, name, password, confirmPassword })
     }
     setEmail("")
-    setUsername("")
+    setName("")
     setPassword("")
     setConfirmPassword("")
   }
@@ -88,31 +88,30 @@ const Login = ({ onSubmit, error }) => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                autoComplete="uname"
-                name="Username"
                 variant="outlined"
                 required
                 fullWidth
-                id="username"
-                label="User Name"
+                id="email"
+                label="Email Address"
+                name="email"
                 autoFocus
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
-
             {tabValue === 1 && (
               <Grid item xs={12}>
                 <TextField
+                  autoComplete="name"
+                  name="Name"
                   variant="outlined"
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  id="name"
+                  label="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </Grid>
             )}
