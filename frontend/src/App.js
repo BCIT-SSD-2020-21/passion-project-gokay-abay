@@ -5,15 +5,11 @@ import Navbar from "./components/Navbar/Navbar"
 import DashboardPage from "./pages/DashboardPage/DashboardPage"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import jwtDecode from "jwt-decode"
+import useLocalStorage from "react-use-localstorage"
 
 function App() {
-  const [token, setToken] = useState("")
+  const [token, setToken] = useLocalStorage("token")
   const [user, setUser] = useState()
-
-  useEffect(() => {
-    const getToken = localStorage.getItem("token")
-    setToken(getToken)
-  }, [])
 
   useEffect(() => {
     if (!token) {
@@ -23,9 +19,14 @@ function App() {
     setUser(user)
   }, [token])
 
+  const signOut = () => {
+    setToken("")
+    setUser()
+  }
+
   return (
     <Router className="App">
-      <Navbar />
+      <Navbar signOut={signOut} user={user} />
       <Switch>
         <Route exact path="/">
           <LoginPage setToken={setToken} />
