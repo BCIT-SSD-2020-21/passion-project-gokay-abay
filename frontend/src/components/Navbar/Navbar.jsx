@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Navbar = ({ signOut }) => {
+const Navbar = ({ signOut, user }) => {
   const classes = useStyles()
   const history = useHistory()
 
@@ -40,15 +40,17 @@ const Navbar = ({ signOut }) => {
           <Typography variant="h6" className={classes.title}>
             Job Tracker
           </Typography>
-          <Button
-            color="inherit"
-            onClick={() => {
-              signOut()
-              history.push("/")
-            }}
-          >
-            Logout
-          </Button>
+          {user && (
+            <Button
+              color="inherit"
+              onClick={() => {
+                signOut()
+                history.push("/")
+              }}
+            >
+              Logout
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>
