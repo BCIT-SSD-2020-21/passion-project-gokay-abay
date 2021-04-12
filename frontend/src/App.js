@@ -11,6 +11,7 @@ import {
 } from "react-router-dom"
 import jwtDecode from "jwt-decode"
 import useLocalStorage from "react-use-localstorage"
+import setAuthToken from "./utils/setAuthToken"
 
 function App() {
   const [token, setToken] = useLocalStorage("token")
@@ -24,8 +25,13 @@ function App() {
     setUser(user)
   }, [token])
 
+  if (localStorage.token) {
+    setAuthToken(localStorage.token)
+  }
+
   const signOut = () => {
     setToken("")
+    localStorage.removeItem("token")
     setUser()
   }
 
