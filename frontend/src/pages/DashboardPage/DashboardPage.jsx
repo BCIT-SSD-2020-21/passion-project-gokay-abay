@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import JobPostTable from "../../components/JobPostTable/JobPostTable"
-import { getAllJobPosts } from "../../api/jobPosts"
+import { createJobPost, getAllJobPosts } from "../../api/jobPosts"
 import CircularProgress from "@material-ui/core/CircularProgress"
+import JobPostTable from "../../components/JobPostTable/JobPostTable"
 import Modal from "../../components/Modal/Modal"
 import NewJobPost from "../../components/NewJobPost/NewJobPost"
 
@@ -22,13 +22,19 @@ const DashboardPage = () => {
   const [jobposts, setJobposts] = useState([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    ;(async () => {
-      const res = await getAllJobPosts()
-      setJobposts(res)
-      setTimeout(() => setLoading(false), 1000)
-    })()
-  }, [])
+  useEffect(() => fetchData(), [])
+
+  const submit = async (formData) => {
+    await createJobPost(formData)
+    fetchData()
+  }
+
+  const fetchData = async () => {
+    setLoading(true)
+    const res = await getAllJobPosts()
+    setJobposts(res)
+    setTimeout(() => setLoading(false), 1000)
+  }
 
   return (
     <div>
@@ -40,7 +46,9 @@ const DashboardPage = () => {
       ) : (
         <>
           <JobPostTable jobposts={jobposts} />
-          <Modal children={<NewJobPost />} />
+          <Modal>
+            <NewJobPost onSubmit={submit} />
+          </Modal>
         </>
       )}
     </div>
