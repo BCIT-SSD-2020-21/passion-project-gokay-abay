@@ -1,31 +1,36 @@
-import * as React from "react"
-import { DataGrid } from "@material-ui/data-grid"
+import React, { useEffect, useState } from "react"
+import { DataGrid, GridToolbar } from "@material-ui/data-grid"
+// import {
+//   randomCreatedDate,
+//   randomUpdatedDate,
+// } from "@material-ui/x-grid-data-generator"
 
 const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
+  { field: "id", hide: true },
+  { field: "title", headerName: "Position", width: 200 },
+  { field: "company", headerName: "Company", width: 130 },
+  { field: "location", headerName: "Location", width: 130 },
   {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 90,
+    field: "postLink",
+    headerName: "Post Link",
+    width: 130,
+    renderCell: (params) => (
+      <a href={params.value} target="_blank">
+        {params.value}
+      </a>
+    ),
   },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.getValue("firstName") || ""} ${
-        params.getValue("lastName") || ""
-      }`,
-  },
+
+  // {
+  //   field: "age",
+  //   headerName: "Age",
+  //   type: "number",
+  //   width: 90,
+  // },
 ]
 
 const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
+  { age: 35, id: 1, firstName: "Jon", lastName: "Snow" },
   { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
   { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
   { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
@@ -36,10 +41,28 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ]
 
-export default function DataTable() {
+export default function DataTable({ jobposts }) {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    jobposts.forEach((post, index) => {
+      post["id"] = index
+    })
+    console.log(jobposts)
+    setLoading(false)
+  }, [])
+
   return (
     <div style={{ height: 400, width: "100%" }}>
-      <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+      {!loading && (
+        <DataGrid
+          rows={jobposts}
+          columns={columns}
+          pageSize={5}
+          // checkboxSelection
+          components={{ Toolbar: GridToolbar }}
+        />
+      )}
     </div>
   )
 }
