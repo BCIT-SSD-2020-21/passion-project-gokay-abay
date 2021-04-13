@@ -4,7 +4,7 @@ const auth = require("../../middleware/auth")
 const { check, validationResult } = require("express-validator/")
 const JobPost = require("../../models/JobPost")
 
-// @route   GET api/posts
+// @route   GET api/jobposts
 // @desc    Get current user job posts
 // @access  Private
 router.get("/", auth, async (req, res) => {
@@ -22,7 +22,7 @@ router.get("/", auth, async (req, res) => {
   }
 })
 
-// @route   POST api/posts
+// @route   POST api/jobposts
 // @desc    Create a job post entry
 // @access  Private
 router.post(
@@ -52,7 +52,7 @@ router.post(
   }
 )
 
-// @route   GET api/posts/id
+// @route   GET api/jobposts/id
 // @desc    Get post by Id
 // @access  Private
 router.get("/:id", auth, async (req, res) => {
@@ -70,7 +70,7 @@ router.get("/:id", auth, async (req, res) => {
   }
 })
 
-// @route   PUT api/posts/id
+// @route   PUT api/jobposts/id
 // @desc    Update post by Id
 // @access  Private
 router.put("/:id", auth, async (req, res) => {
@@ -93,7 +93,7 @@ router.put("/:id", auth, async (req, res) => {
   }
 })
 
-// @route   DELETE api/posts/id
+// @route   DELETE api/jobposts/id
 // @desc    Delete post by Id
 // @access  Private
 router.delete("/:id", auth, async (req, res) => {
