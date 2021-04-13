@@ -9,6 +9,7 @@ import { IconButton } from "@material-ui/core"
 import Fab from "@material-ui/core/Fab"
 import EditIcon from "@material-ui/icons/Edit"
 import AddIcon from "@material-ui/icons/Add"
+import DeleteIcon from "@material-ui/icons/Delete"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,6 +37,7 @@ const DashboardPage = () => {
   const [jobposts, setJobposts] = useState([])
   const [loading, setLoading] = useState(true)
   const [addClicked, setAddClicked] = useState()
+  const [rowData, setRowData] = useState({})
 
   useEffect(() => fetchData(), [])
 
@@ -51,10 +53,7 @@ const DashboardPage = () => {
     setTimeout(() => setLoading(false), 1000)
   }
 
-  const getRowData = (data) => {
-    console.log(data)
-  }
-
+  const update = () => {}
   return (
     <div>
       {loading ? (
@@ -65,9 +64,16 @@ const DashboardPage = () => {
       ) : (
         <div className={classes.root}>
           <div className={classes.buttons}>
-            <Fab color="secondary" aria-label="edit">
-              <EditIcon />
-            </Fab>
+            {rowData.isSelected && (
+              <>
+                <Fab color="secondary" aria-label="edit">
+                  <EditIcon onClick={update} />
+                </Fab>
+                <Fab color="secondary" aria-label="edit">
+                  <DeleteIcon />
+                </Fab>
+              </>
+            )}
             <Fab
               color="primary"
               aria-label="edit"
@@ -76,7 +82,10 @@ const DashboardPage = () => {
               <AddIcon />
             </Fab>
           </div>
-          <JobPostTable jobposts={jobposts} getRowData={getRowData} />
+          <JobPostTable
+            jobposts={jobposts}
+            getRowData={(data) => setRowData(data)}
+          />
           <Modal addClicked={addClicked}>
             <NewJobPost onSubmit={submit} />
           </Modal>
