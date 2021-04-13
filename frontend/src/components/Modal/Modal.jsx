@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import Modal from "@material-ui/core/Modal"
 import Backdrop from "@material-ui/core/Backdrop"
@@ -18,23 +18,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function TransitionsModal({ children }) {
+export default function TransitionsModal({ children, addClicked, modalClose }) {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
 
-  const handleOpen = () => {
+  useEffect(() => {
     setOpen(true)
-  }
+  }, [addClicked])
+
+  useEffect(() => {
+    setOpen(false)
+  }, [])
 
   const handleClose = () => {
     setOpen(false)
+    // modalClose(false)
   }
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
+      {/* <button type="button" onClick={handleOpen}>
         react-transition-group
-      </button>
+      </button> */}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

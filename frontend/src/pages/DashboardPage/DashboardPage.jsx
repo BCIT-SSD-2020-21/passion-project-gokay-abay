@@ -35,6 +35,7 @@ const DashboardPage = () => {
 
   const [jobposts, setJobposts] = useState([])
   const [loading, setLoading] = useState(true)
+  const [addClicked, setAddClicked] = useState()
 
   useEffect(() => fetchData(), [])
 
@@ -67,12 +68,16 @@ const DashboardPage = () => {
             <Fab color="secondary" aria-label="edit">
               <EditIcon />
             </Fab>
-            <Fab color="primary" aria-label="edit">
+            <Fab
+              color="primary"
+              aria-label="edit"
+              onClick={() => setAddClicked(!addClicked)}
+            >
               <AddIcon />
             </Fab>
           </div>
           <JobPostTable jobposts={jobposts} getRowData={getRowData} />
-          <Modal>
+          <Modal addClicked={addClicked}>
             <NewJobPost onSubmit={submit} />
           </Modal>
         </div>
