@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const NewJobPost = () => {
+const NewJobPost = ({ onSubmit }) => {
   const classes = useStyles()
   const [formData, setFormData] = useState({
     title: "",
@@ -32,6 +32,7 @@ const NewJobPost = () => {
 
   const submit = (e) => {
     e.preventDefault()
+    onSubmit(formData)
   }
 
   const handleChange = (e) => {
