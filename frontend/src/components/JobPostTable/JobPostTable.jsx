@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { DataGrid, GridToolbar } from "@material-ui/data-grid"
+import { Paper, IconButton } from "@material-ui/core"
 // import {
 //   randomCreatedDate,
 //   randomUpdatedDate,
@@ -20,29 +21,11 @@ const columns = [
       </a>
     ),
   },
-
-  // {
-  //   field: "age",
-  //   headerName: "Age",
-  //   type: "number",
-  //   width: 90,
-  // },
 ]
 
-const rows = [
-  { age: 35, id: 1, firstName: "Jon", lastName: "Snow" },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-]
-
-export default function DataTable({ jobposts }) {
+export default function DataTable({ jobposts, getRowData }) {
   const [loading, setLoading] = useState(true)
+  // const [selection, setSelection] = useState({})
 
   useEffect(() => {
     jobposts.forEach((post, index) => {
@@ -53,7 +36,7 @@ export default function DataTable({ jobposts }) {
   }, [])
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <Paper style={{ height: 400, width: "100%" }}>
       {!loading && (
         <DataGrid
           rows={jobposts}
@@ -61,8 +44,10 @@ export default function DataTable({ jobposts }) {
           pageSize={5}
           // checkboxSelection
           components={{ Toolbar: GridToolbar }}
+          // onCellClick={() => console.log("cell")}
+          onRowSelected={(data) => getRowData(data)}
         />
       )}
-    </div>
+    </Paper>
   )
 }
