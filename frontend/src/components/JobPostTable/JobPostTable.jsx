@@ -15,7 +15,7 @@ const columns = [
     headerName: "Post Link",
     width: 130,
     renderCell: (params) => (
-      <a href={params.value} target="_blank">
+      <a href={params.value} target="_blank" rel="noreferrer">
         {params.value}
       </a>
     ),
