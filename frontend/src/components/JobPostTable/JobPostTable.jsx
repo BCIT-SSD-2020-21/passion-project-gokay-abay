@@ -21,6 +21,7 @@ const columns = [
       </a>
     ),
   },
+  { field: "description", headerName: "Description", width: 200 },
 ]
 
 export default function DataTable({ jobposts, getRowData }) {
