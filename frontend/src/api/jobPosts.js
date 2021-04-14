@@ -16,13 +16,26 @@ export async function getAllJobPosts() {
   }
 }
 
-export async function createJobPost(body) {
+export async function createJobPost(post) {
   if (localStorage.token) {
     setAuthToken(localStorage.token)
   }
 
   try {
-    const res = await axios.post(url + "/api/jobposts", body)
+    const res = await axios.post(url + "/api/jobposts", post)
+    return res.data
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export async function updateJobPost({ post, postId }) {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token)
+  }
+
+  try {
+    const res = await axios.put(`${url}/api/jobposts/${postId}`, post)
     return res.data
   } catch (err) {
     console.log(err)
