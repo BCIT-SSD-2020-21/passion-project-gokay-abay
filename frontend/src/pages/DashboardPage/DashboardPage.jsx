@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import { createJobPost, getAllJobPosts } from "../../api/jobPosts"
+import {
+  createJobPost,
+  getAllJobPosts,
+  updateJobPost,
+} from "../../api/jobPosts"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import JobPostTable from "../../components/JobPostTable/JobPostTable"
 import Modal from "../../components/Modal/Modal"
 import NewJobPost from "../../components/NewJobPost/NewJobPost"
-import { IconButton } from "@material-ui/core"
+import UpdateJobPost from "../../components/UpdateJobPost/UpdateJobPost"
 import Fab from "@material-ui/core/Fab"
 import EditIcon from "@material-ui/icons/Edit"
 import AddIcon from "@material-ui/icons/Add"
@@ -37,12 +41,19 @@ const DashboardPage = () => {
   const [jobposts, setJobposts] = useState([])
   const [loading, setLoading] = useState(true)
   const [addClicked, setAddClicked] = useState()
+  const [editClicked, setEditClicked] = useState(false)
+
   const [rowData, setRowData] = useState({})
 
   useEffect(() => fetchData(), [])
 
-  const submit = async (formData) => {
+  const submitNew = async (formData) => {
     await createJobPost(formData)
+    fetchData()
+  }
+
+  const submitUpdate = async (formData) => {
+    await updateJobPost(formData, rowData.data._id)
     fetchData()
   }
 
@@ -53,7 +64,6 @@ const DashboardPage = () => {
     setTimeout(() => setLoading(false), 1000)
   }
 
-  const update = () => {}
   return (
     <div>
       {loading ? (
@@ -66,8 +76,14 @@ const DashboardPage = () => {
           <div className={classes.buttons}>
             {rowData.isSelected && (
               <>
-                <Fab color="secondary" aria-label="edit">
-                  <EditIcon onClick={update} />
+                <Fab
+                  onClick={() => {
+                    setEditClicked(!editClicked)
+                  }}
+                  color="secondary"
+                  aria-label="edit"
+                >
+                  <EditIcon />
                 </Fab>
                 <Fab color="secondary" aria-label="edit">
                   <DeleteIcon />
@@ -87,7 +103,10 @@ const DashboardPage = () => {
             getRowData={(data) => setRowData(data)}
           />
           <Modal addClicked={addClicked}>
-            <NewJobPost onSubmit={submit} />
+            <NewJobPost onSubmit={submitNew} />
+          </Modal>
+          <Modal editClicked={editClicked}>
+            <UpdateJobPost onSubmit={submitUpdate} jobpost={rowData.data} />
           </Modal>
         </div>
       )}
