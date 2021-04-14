@@ -41,3 +41,16 @@ export async function updateJobPost(post, postId) {
     console.log(err)
   }
 }
+
+export async function deleteJobPost(postId) {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token)
+  }
+
+  try {
+    const res = await axios.put(`${url}/api/jobposts/${postId}`)
+    return res.data
+  } catch (err) {
+    console.log(err)
+  }
+}
