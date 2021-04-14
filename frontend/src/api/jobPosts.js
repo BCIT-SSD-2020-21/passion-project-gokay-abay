@@ -29,7 +29,7 @@ export async function createJobPost(post) {
   }
 }
 
-export async function updateJobPost({ post, postId }) {
+export async function updateJobPost(post, postId) {
   if (localStorage.token) {
     setAuthToken(localStorage.token)
   }
