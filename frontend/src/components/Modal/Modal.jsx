@@ -18,13 +18,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function TransitionsModal({ children, addClicked, modalClose }) {
+export default function TransitionsModal({
+  children,
+  addClicked,
+  editClicked,
+}) {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
 
   useEffect(() => {
     setOpen(true)
   }, [addClicked])
+
+  useEffect(() => {
+    setOpen(true)
+  }, [editClicked])
 
   useEffect(() => {
     setOpen(false)
