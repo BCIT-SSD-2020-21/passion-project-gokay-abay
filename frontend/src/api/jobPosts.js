@@ -9,7 +9,7 @@ export async function getAllJobPosts() {
   }
 
   try {
-    const res = await axios.get(url + "/api/jobposts")
+    const res = await axios.get(`${url}/api/jobposts`)
     return res.data
   } catch (err) {
     console.log(err)
@@ -22,7 +22,7 @@ export async function createJobPost(post) {
   }
 
   try {
-    const res = await axios.post(url + "/api/jobposts", post)
+    const res = await axios.post(`${url}/api/jobposts`, post)
     return res.data
   } catch (err) {
     console.log(err)
