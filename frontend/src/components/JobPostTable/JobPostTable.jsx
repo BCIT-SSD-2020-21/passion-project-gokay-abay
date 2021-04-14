@@ -28,11 +28,13 @@ export default function DataTable({ jobposts, getRowData }) {
   // const [selection, setSelection] = useState({})
 
   useEffect(() => {
-    jobposts.forEach((post, index) => {
-      post["id"] = index
-    })
-    console.log(jobposts)
-    setLoading(false)
+    if (jobposts) {
+      jobposts.forEach((post, index) => {
+        post["id"] = index
+      })
+      console.log(jobposts)
+      setLoading(false)
+    }
   }, [])
 
   return (
