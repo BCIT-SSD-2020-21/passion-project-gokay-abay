@@ -4,7 +4,7 @@ const url = "http://localhost:5000"
 // Register User
 export async function registerUser({ name, email, password }) {
   try {
-    const res = await axios.post(url + "/api/users", {
+    const res = await axios.post(`${url}/api/users`, {
       name: name,
       email: email,
       password: password,
@@ -17,7 +17,7 @@ export async function registerUser({ name, email, password }) {
 
 export async function authUser({ email, password }) {
   try {
-    const res = await axios.post(url + "/api/auth", {
+    const res = await axios.post(`${url}/api/auth`, {
       email: email,
       password: password,
     })
