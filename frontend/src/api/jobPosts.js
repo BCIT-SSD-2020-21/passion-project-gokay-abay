@@ -48,7 +48,7 @@ export async function deleteJobPost(postId) {
   }
 
   try {
-    const res = await axios.put(`${url}/api/jobposts/${postId}`)
+    const res = await axios.delete(`${url}/api/jobposts/${postId}`)
     return res.data
   } catch (err) {
     console.log(err)
