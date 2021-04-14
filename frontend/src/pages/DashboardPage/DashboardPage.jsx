@@ -4,6 +4,7 @@ import {
   createJobPost,
   getAllJobPosts,
   updateJobPost,
+  deleteJobPost,
 } from "../../api/jobPosts"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import JobPostTable from "../../components/JobPostTable/JobPostTable"
@@ -57,6 +58,11 @@ const DashboardPage = () => {
     fetchData()
   }
 
+  const deleteClicked = async () => {
+    await deleteJobPost(rowData.data._id)
+    fetchData()
+  }
+
   const fetchData = async () => {
     setLoading(true)
     const res = await getAllJobPosts()
@@ -85,7 +91,11 @@ const DashboardPage = () => {
                 >
                   <EditIcon />
                 </Fab>
-                <Fab color="secondary" aria-label="edit">
+                <Fab
+                  color="secondary"
+                  aria-label="edit"
+                  onClick={() => deleteClicked()}
+                >
                   <DeleteIcon />
                 </Fab>
               </>
