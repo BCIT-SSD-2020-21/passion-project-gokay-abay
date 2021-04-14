@@ -8,6 +8,7 @@ import {
   Switch,
   FormControlLabel,
 } from "@material-ui/core"
+import DatePicker from "../DatePicker/DatePicker"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +30,7 @@ const NewJobPost = ({ onSubmit }) => {
     contactInfo: "",
     description: "",
   })
+  const [isApplied, setIsApplied] = useState(false)
 
   const submit = (e) => {
     e.preventDefault()
@@ -37,6 +39,10 @@ const NewJobPost = ({ onSubmit }) => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSwitch = (e) => {
+    setIsApplied(e.target.checked)
   }
 
   const {
@@ -89,14 +95,22 @@ const NewJobPost = ({ onSubmit }) => {
             value={contactInfo}
             onChange={handleChange}
           />
+        </div>
+        <div>
           <FormControlLabel
             value="top"
             control={
-              <Switch color="primary" name="applied" onChange={handleChange} />
+              <Switch
+                color="primary"
+                name="applied"
+                checked={isApplied}
+                onChange={handleSwitch}
+              />
             }
             label="Applied"
             labelPlacement="top"
           />
+          {isApplied && <DatePicker />}
         </div>
         <div>
           <TextField
