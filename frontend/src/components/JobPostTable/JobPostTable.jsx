@@ -22,7 +22,19 @@ const columns = [
     ),
   },
   { field: "description", headerName: "Description", width: 200 },
+  {
+    field: "dateApplied",
+    headerName: "Date of Application",
+    width: 200,
+    valueFormatter: (params) => {
+      return params.value
+    },
+  },
 ]
+
+const formatDate = (string) => {
+  let formattedStr = string
+}
 
 export default function DataTable({ jobposts, getRowData }) {
   const [loading, setLoading] = useState(true)
