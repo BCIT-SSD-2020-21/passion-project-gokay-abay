@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: "1em",
     // backgroundColor: "#F5F5F5",
-    minHeight: "100vh",
+    // minHeight: "100vh",
   },
   loading: {
     height: "50vh",
@@ -51,16 +51,19 @@ const DashboardPage = () => {
   const submitNew = async (formData) => {
     await createJobPost(formData)
     fetchData()
+    setRowData({})
   }
 
   const submitUpdate = async (formData) => {
     await updateJobPost(formData, rowData.data._id)
     fetchData()
+    setRowData({})
   }
 
   const deleteClicked = async () => {
     await deleteJobPost(rowData.data._id)
     fetchData()
+    setRowData({})
   }
 
   const fetchData = async () => {
@@ -88,6 +91,7 @@ const DashboardPage = () => {
                   }}
                   color="secondary"
                   aria-label="edit"
+                  style={{ marginRight: "1em", backgroundColor: "orange" }}
                 >
                   <EditIcon />
                 </Fab>
@@ -95,6 +99,7 @@ const DashboardPage = () => {
                   color="secondary"
                   aria-label="edit"
                   onClick={() => deleteClicked()}
+                  style={{ marginRight: "1em" }}
                 >
                   <DeleteIcon />
                 </Fab>
