@@ -27,7 +27,7 @@ const JobPostSchema = new mongoose.Schema({
     default: Date.now,
   },
   dateApplied: {
-    type: Date,
+    type: String,
   },
   description: {
     type: String,
