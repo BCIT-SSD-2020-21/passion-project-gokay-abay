@@ -22,6 +22,9 @@ const JobPostSchema = new mongoose.Schema({
   postLink: {
     type: String,
   },
+  requirements: {
+    type: String,
+  },
   dateCreated: {
     type: Date,
     default: Date.now,
