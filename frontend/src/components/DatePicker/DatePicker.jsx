@@ -1,5 +1,5 @@
-import "date-fns"
-import React from "react"
+// import "date-fns"
+import React, { useEffect } from "react"
 import Grid from "@material-ui/core/Grid"
 import DateFnsUtils from "@date-io/date-fns"
 import {
@@ -8,13 +8,27 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers"
 
-export default function MaterialUIPickers() {
-  // The first commit of Material-UI
+export default function MaterialUIPickers({ setDate }) {
   const [selectedDate, setSelectedDate] = React.useState(new Date())
+  const [formattedDate, setFormattedDate] = React.useState()
+
+  useEffect(() => {
+    setDate(formatDate(selectedDate))
+  }, [])
 
   const handleDateChange = (date) => {
     setSelectedDate(date)
-    console.log(date)
+    const newDate = formatDate(date)
+    // setFormattedDate(newDate)
+    console.log(newDate)
+    setDate(newDate)
+  }
+
+  const formatDate = (date) => {
+    let datestring = `${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()}`
+    return datestring
   }
 
   return (
