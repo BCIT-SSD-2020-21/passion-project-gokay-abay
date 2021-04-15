@@ -29,6 +29,7 @@ const NewJobPost = ({ onSubmit }) => {
     postLink: "",
     contactInfo: "",
     description: "",
+    dateApplied: "",
   })
   const [isApplied, setIsApplied] = useState(false)
 
@@ -43,6 +44,9 @@ const NewJobPost = ({ onSubmit }) => {
 
   const handleSwitch = (e) => {
     setIsApplied(e.target.checked)
+    if (!e.target.checked) {
+      setFormData({ ...formData, dateApplied: "" })
+    }
   }
 
   const {
@@ -110,7 +114,13 @@ const NewJobPost = ({ onSubmit }) => {
             label="Applied"
             labelPlacement="top"
           />
-          {isApplied && <DatePicker />}
+          {isApplied && (
+            <DatePicker
+              setDate={(date) =>
+                setFormData({ ...formData, dateApplied: date })
+              }
+            />
+          )}
         </div>
         <div>
           <TextField
