@@ -8,12 +8,16 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers"
 
-export default function MaterialUIPickers({ setDate }) {
+export default function MaterialUIPickers({ setDate, updateDate }) {
   const [selectedDate, setSelectedDate] = React.useState(new Date())
   const [formattedDate, setFormattedDate] = React.useState()
 
   useEffect(() => {
-    setDate(formatDate(selectedDate))
+    if (updateDate) {
+      setSelectedDate(updateDate)
+    } else {
+      setDate(formatDate(selectedDate))
+    }
   }, [])
 
   const handleDateChange = (date) => {
@@ -25,9 +29,9 @@ export default function MaterialUIPickers({ setDate }) {
   }
 
   const formatDate = (date) => {
-    let datestring = `${date.getDate()}/${
+    let datestring = `${
       date.getMonth() + 1
-    }/${date.getFullYear()}`
+    }/${date.getDate()}/${date.getFullYear()}`
     return datestring
   }
 
@@ -39,7 +43,7 @@ export default function MaterialUIPickers({ setDate }) {
         format="MM/dd/yyyy"
         margin="normal"
         id="date-picker-inline"
-        label="Date picker inline"
+        label="Date Applied"
         value={selectedDate}
         onChange={handleDateChange}
         KeyboardButtonProps={{
