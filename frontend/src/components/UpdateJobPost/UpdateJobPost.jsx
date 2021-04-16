@@ -37,6 +37,7 @@ const UpdateJobPost = ({ onSubmit, jobpost }) => {
     contactInfo: jobpost ? jobpost.contactInfo : "",
     description: jobpost ? jobpost.description : "",
     dateApplied: jobpost ? jobpost.dateApplied : "",
+    requirements: jobpost ? jobpost.requirements : "",
     dateFollowup: "",
   })
 
