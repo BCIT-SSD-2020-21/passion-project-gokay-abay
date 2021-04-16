@@ -2,6 +2,7 @@ import "./App.css"
 import React, { useState, useEffect } from "react"
 import LoginPage from "./pages/LoginPage/LoginPage"
 import Navbar from "./components/Navbar/Navbar"
+import Footer from "./components/Footer/Footer"
 import DashboardPage from "./pages/DashboardPage/DashboardPage"
 import {
   BrowserRouter as Router,
@@ -58,6 +59,7 @@ function App() {
           <DashboardPage />
         </PrivateRoute>
       </Switch>
+      <Footer />
     </Router>
   )
 }
