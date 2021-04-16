@@ -31,6 +31,7 @@ const JobPostSchema = new mongoose.Schema({
   },
   dateApplied: {
     type: String,
+    default: "N/A",
   },
   description: {
     type: String,
