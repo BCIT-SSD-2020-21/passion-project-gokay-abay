@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { DataGrid, GridToolbar } from "@material-ui/data-grid"
-import { Paper, IconButton } from "@material-ui/core"
-// import {
-//   randomCreatedDate,
-//   randomUpdatedDate,
-// } from "@material-ui/x-grid-data-generator"
+import { Paper } from "@material-ui/core"
 
 const columns = [
   { field: "id", hide: true },
@@ -21,24 +17,29 @@ const columns = [
       </a>
     ),
   },
-  { field: "description", headerName: "Description", width: 200 },
+  {
+    field: "contactInfo",
+    headerName: "Contact Info",
+    width: 150,
+    renderCell: (params) => (
+      <a href={`mailto:${params.value}`} target="_blank" rel="noreferrer">
+        {params.value}
+      </a>
+    ),
+  },
   {
     field: "dateApplied",
-    headerName: "Date of Application",
-    width: 200,
+    headerName: "Date Applied",
+    width: 150,
     valueFormatter: (params) => {
       return params.value
     },
   },
+  { field: "description", headerName: "Description", width: 200 },
 ]
-
-const formatDate = (string) => {
-  let formattedStr = string
-}
 
 export default function DataTable({ jobposts, getRowData }) {
   const [loading, setLoading] = useState(true)
-  // const [selection, setSelection] = useState({})
 
   useEffect(() => {
     if (jobposts) {
@@ -57,9 +58,7 @@ export default function DataTable({ jobposts, getRowData }) {
           rows={jobposts}
           columns={columns}
           pageSize={5}
-          // checkboxSelection
           components={{ Toolbar: GridToolbar }}
-          // onCellClick={() => console.log("cell")}
           onRowSelected={(data) => getRowData(data)}
         />
       )}
