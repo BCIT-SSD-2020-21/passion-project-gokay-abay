@@ -37,11 +37,14 @@ const UpdateJobPost = ({ onSubmit, jobpost }) => {
     contactInfo: jobpost ? jobpost.contactInfo : "",
     description: jobpost ? jobpost.description : "",
     dateApplied: jobpost ? jobpost.dateApplied : "",
+    dateFollowup: "",
   })
 
   const [isApplied, setIsApplied] = useState(
     jobpost.dateApplied !== "N/A" ? true : false
   )
+
+  const [followup, setFollowup] = useState(false)
 
   const submit = (e) => {
     e.preventDefault()
@@ -59,6 +62,13 @@ const UpdateJobPost = ({ onSubmit, jobpost }) => {
     }
   }
 
+  const handleFollowup = (e) => {
+    setFollowup(e.target.checked)
+    // if (!e.target.checked) {
+    //   setFormData({ ...formData, dateApplied: "" })
+    // }
+  }
+
   const {
     title,
     company,
@@ -67,6 +77,8 @@ const UpdateJobPost = ({ onSubmit, jobpost }) => {
     contactInfo,
     description,
     requirements,
+    dateApplied,
+    dateFollowup,
   } = formData
 
   return (
@@ -145,6 +157,31 @@ const UpdateJobPost = ({ onSubmit, jobpost }) => {
               setDate={(date) =>
                 setFormData({ ...formData, dateApplied: date })
               }
+              updateDate={dateApplied}
+            />
+          )}
+        </div>
+        <div className={classes.rows}>
+          <FormControlLabel
+            className={classes.inputs}
+            value="top"
+            control={
+              <Switch
+                color="primary"
+                name="followup"
+                checked={followup}
+                onChange={handleFollowup}
+              />
+            }
+            label="Follow up"
+            labelPlacement="top"
+          />
+          {followup && (
+            <DatePicker
+              setDate={(date) =>
+                setFormData({ ...formData, dateFollowup: date })
+              }
+              updateDate={dateFollowup}
             />
           )}
         </div>
