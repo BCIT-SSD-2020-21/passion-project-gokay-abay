@@ -7,6 +7,7 @@ import {
   deleteJobPost,
 } from "../../api/jobPosts"
 import CircularProgress from "@material-ui/core/CircularProgress"
+import { Typography } from "@material-ui/core"
 import JobPostTable from "../../components/JobPostTable/JobPostTable"
 import Modal from "../../components/Modal/Modal"
 import NewJobPost from "../../components/NewJobPost/NewJobPost"
@@ -21,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
     padding: "1em",
     // backgroundColor: "#F5F5F5",
     // minHeight: "100vh",
+  },
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
   },
   loading: {
     height: "50vh",
@@ -82,36 +87,41 @@ const DashboardPage = () => {
         </div>
       ) : (
         <div className={classes.root}>
-          <div className={classes.buttons}>
-            {rowData.isSelected && (
-              <>
-                <Fab
-                  onClick={() => {
-                    setEditClicked(!editClicked)
-                  }}
-                  color="secondary"
-                  aria-label="edit"
-                  style={{ marginRight: "1em", backgroundColor: "orange" }}
-                >
-                  <EditIcon />
-                </Fab>
-                <Fab
-                  color="secondary"
-                  aria-label="edit"
-                  onClick={() => deleteClicked()}
-                  style={{ marginRight: "1em" }}
-                >
-                  <DeleteIcon />
-                </Fab>
-              </>
-            )}
-            <Fab
-              color="primary"
-              aria-label="edit"
-              onClick={() => setAddClicked(!addClicked)}
-            >
-              <AddIcon />
-            </Fab>
+          <div className={classes.header}>
+            <div style={{ alignSelf: "center" }}>
+              <Typography variant="h4">My Job Applications</Typography>
+            </div>
+            <div className={classes.buttons}>
+              {rowData.isSelected && (
+                <div>
+                  <Fab
+                    onClick={() => {
+                      setEditClicked(!editClicked)
+                    }}
+                    color="secondary"
+                    aria-label="edit"
+                    style={{ marginRight: "1em", backgroundColor: "orange" }}
+                  >
+                    <EditIcon />
+                  </Fab>
+                  <Fab
+                    color="secondary"
+                    aria-label="edit"
+                    onClick={() => deleteClicked()}
+                    style={{ marginRight: "1em" }}
+                  >
+                    <DeleteIcon />
+                  </Fab>
+                </div>
+              )}
+              <Fab
+                color="primary"
+                aria-label="edit"
+                onClick={() => setAddClicked(!addClicked)}
+              >
+                <AddIcon />
+              </Fab>
+            </div>
           </div>
           <JobPostTable
             jobposts={jobposts}
